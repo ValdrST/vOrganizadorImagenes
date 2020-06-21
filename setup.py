@@ -12,7 +12,7 @@ with open('README.md', 'r', encoding='utf-8') as f:
 requirements = parse_requirements("./requirements.txt", session=False)
 
 setup(name='organizadorImagenes',
-      version="0.2",
+      version="0.3.3",
       description='Aplicacion para organizar imagenes en un directorio',
       long_description=readme,
       long_description_content_type="text/markdown",

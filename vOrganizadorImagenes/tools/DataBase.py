@@ -3,7 +3,7 @@ import sqlite3
 import logging
 class DataBase():
     def __init__(self, dbFile):
-        self.conn = sqlite3.connect(dbFile)
+        self.conn = sqlite3.connect(dbFile, check_same_thread=False)
     
     def crearBase(self):
         try:
@@ -20,8 +20,13 @@ class DataBase():
 
     def insertarFoto(self,foto):
         cursor = self.conn.cursor()
-        cursor.execute('INSERT INTO fotos (fileName, hash, hasExif, hasDateTime, corruptExif) VALUES (?,?,?,?,?)',
-        (foto["fileName"], foto["hash"], foto["hasExif"], foto["hasDateTime"], foto["corruptExif"]))
+        cursor.execute('INSERT INTO fotos (fileName, hash, hasExif, hasDateTime, corruptExif, newFileName) VALUES (?,?,?,?,?,?)',
+        (foto["fileName"], foto["hash"], foto["hasExif"], foto["hasDateTime"], foto["corruptExif"],foto["newFileName"]))
+
+    def actualizarFoto(self, foto):
+        cursor = self.conn.cursor()
+        cursor.execute('REPLACE INTO fotos (fileName, hash, hasExif, hasDateTime, corruptExif, newFileName) VALUES (?,?,?,?,?,?)',
+        (foto["fileName"], foto["hash"], foto["hasExif"], foto["hasDateTime"], foto["corruptExif"],foto["newFileName"]))
 
     def getConHash(self,hash):
         cursor = self.conn.cursor()

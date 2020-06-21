@@ -19,5 +19,5 @@ class Console(object):
     def iniciar(self):
         self.argumentParse()
         print(self.args)
-        organizador = Organizador(dirsInput=self.args.dirs_input)
+        organizador = Organizador(dirsInput=self.args.dirs_input,dirOutput=self.args.dir_out)
         organizador.procesarDirsInput()
